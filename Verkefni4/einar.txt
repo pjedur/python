@@ -1,0 +1,35 @@
+def sort_tv_show(path, show,pathtoshowfolder):
+	#show=show.lower()
+	file_endings = ['.avi', '.mpg', '.mp4', '.mkv', '.m4v']
+
+	showlist = show.lower().split()
+	reg = ''
+	for x in showlist:
+		reg += x + '[\s|.|-|\w*]*'
+
+	#reg = reg[:-1]
+	pattern = re.compile(reg)
+	print("reg: ", reg)
+	
+	'''m = pattern.search("8 out of 10 cats - Season 7")
+	print("m: ", m)
+	if m:
+		print('Yes', m.group())
+	else:
+		print('No match')'''
+
+	for root, dirs, files in os.walk(path):
+		for f in files:
+			m = pattern.search(f.lower())
+			if m:
+				Filename, FileExt = f.splitext
+				print("found show")
+				print(m)
+				print(m.group())
+				print(root)
+				print(f)
+				#print(root,f)
+				
+				#print(dirs)
+				#print(f)
+				#shutil.move(os.join(root,f),pathtoshowfolder)
